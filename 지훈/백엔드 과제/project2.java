@@ -1,67 +1,55 @@
 package Techit;
 
-class Student extends showInfo {
-    String studentname;
+import org.w3c.dom.ls.LSOutput;
 
+class Student {
+    String studentname;
+    int money;
     Student(String studentname, int money) {
         this.studentname = studentname;
         this.money = money;
     }
-    int changes = money-income;
-    void showInfo() {};
-
-    void takeBus(Bus bus771) {};
-    void takeTaxi(Taxi taxi0486) {};
-    void takeSubway(Subway subway1) {};
+    void takeBus(Bus bus771) {money= money-bus771.fee; bus771.passengers++; bus771.income = bus771.fee;}
+    void takeTaxi(Taxi taxi0406) {money= money-taxi0406.fee;taxi0406.income = taxi0406.fee; taxi0406.passengers++;}
+    void takeSubway(Subway subway1) {money= money-subway1.fee;subway1.passengers++;subway1.income = subway1.fee;}
+    void showInfo() {
+        System.out.println(studentname + "의 남은 돈은 " + money+ "원 입니다.");}
 }
-class showInfo  {
+class Transfer {
     int number;
-    int studentname;
-    int passengers = 1;
+    String subwayLine;
+    int passengers;
     int income;
-    int money;
+
+
 }
-class Bus extends showInfo{
+class Bus extends Transfer {
     Bus(int number) {
         this.number = number;
     }
-    String studentname = "Kim";
-    int money = 10000;
-    int income = 1500;
-    int changes = money-income;
+    int fee = 1500;
 
     void showInfo() {
-        System.out.println(studentname + "의 남은 돈은" + (changes)+ "원 입니다.");
-        System.out.println("버스"+number+"번의 승객은"+passengers+"명이고, 수입은"+income+"원 입니다.");
+        System.out.println("버스"+number+"번의 승객은 "+passengers+"명이고, 수입은 "+ fee +"원 입니다.");
     }
+
 }
-class Taxi extends showInfo{
-    Taxi(int number){
+class Taxi extends Transfer {
+    Taxi(int number) {
         this.number = number;
     }
-    String studentname = "Lee";
-    int money = 45000;
-    int income = 4500;
-    int changes = money-income;
+    int fee = 4500;
     void showInfo() {
-        System.out.println(studentname + "의 남은 돈은" + changes + "원 입니다.");
-        System.out.println("택시"+number+"번의 승객은"+passengers+"명이고, 수입은"+income+"원 입니다.");
+        System.out.println("택시"+number+"번의 승객은 "+ passengers+"명이고, 수입은 "+ fee +"원 입니다.");
     }
 }
-class Subway extends showInfo{
-    String subway;
-    String studentname = "Park";
-    int money = 5000;
-    int income = 1500;
-    int changes = money-income;
-    Subway(String subway) {
-        System.out.println(studentname + "의 남은 돈은" + changes + "원 입니다.");
-        this.subway = subway;
+class Subway extends Transfer {
+    Subway(String subwayLine) {
+        this.subwayLine = subwayLine;
     }
-
-
+    int fee = 1500;
     void showInfo() {
-        System.out.println("지하철"+subway+"의 승객은"+passengers+"명이고, 수입은"+income+"원 입니다.");
+        System.out.println("지하철"+subwayLine+"호선의 승객은"+ passengers+"명이고, 수입은 "+ fee +"원 입니다.");
     }
 }
 public class project2 {
