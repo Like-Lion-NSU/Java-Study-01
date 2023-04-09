@@ -44,9 +44,10 @@ public class Main {
         St SL = new St("Lee",45000);
         St SP = new St("Park",5000); //이거 근데 this로 하면 마지막만 저장되는데 어카지 : 일단 한 명만 살린다.....
 
-        Bus bus771 = new Bus(771);
+        Bus bus771 = new Bus(771); //일단 버스만 잡는다
         SK.takeBus(bus771.num); //num안붙이고 가능한가
         SK.sI();
         bus771.sI();
     }
 }
+//진자 뭐가 문제인데 뭐가 왜 안 되는 건데 진자 뭐가 문제인건데에에에에엑
