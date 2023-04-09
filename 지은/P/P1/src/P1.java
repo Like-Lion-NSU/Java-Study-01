@@ -25,4 +25,5 @@ public class P1 {
         System.out.printf("10원 %d개\n", S);
         System.out.printf("1원 %d개", a);
     }
+
 }
