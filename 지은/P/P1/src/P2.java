@@ -32,16 +32,17 @@ public class P2 {
         List<User> Users = new ArrayList<>(Arrays.asList(
                 new User("Jamse", 10, 3000),
                 new User("Alice", 20, 4000),
-                new User("Thomas", 15, 3500)));
+                new User("Thomas", 15, 3500))); //구글링해도 왜 다 배열이 아니라 하나인거냐~~
         List<String>names =
                 Users.stream().
+                        //filter(names.get().getname).collect(Collectors.toList()); 이것도 아니잖
                         filter(User::getName).collect(Collectors.toList());
         List<int>powerSum=
-                Users.stream().
-                        filter(User::getSumPower).collect(Collectors.toList());
+                Users.stream().//예시 찾아봐도 읍다
+                        filter(User::getSumPower).collect(Collectors.toList()); //검색해도 안나옴... 오류 퉤퉤
         List<int>level15 =
                 Users.stream().sorted(Comparator.comparing(User::getLevel).reversed()).
-                        filter(User::getLevel>=15).map(User::up).collect(Collectors.toList());
+                        filter(User::getLevel>=15).map(User::up).collect(Collectors.toList()); // 약간 IF문처럼 T/F반환해서 하는 것 같은데 근데 왜 이건 우우우
 
         System.out.println("[User name]");
         System.out.println(names);
