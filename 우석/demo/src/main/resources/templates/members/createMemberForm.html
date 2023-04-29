@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"><body>
+<div class="container">
+  <!-- form 태그 /members/new로 post 요청 -->
+  <form action="/members/new" method="post">
+    <div class="form-group">
+      <!-- 폼 라벨 -->
+      <label for="name">이름</label>
+      <!-- input 태그, text를 입력받음 -->
+      <!-- 입력한 값이 name 속성으로 스프링으로 전달됨-->
+      <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+    </div>
+    <!-- 요청 전송 -->
+    <button type="submit">등록</button>
+  </form>
+</div> <!-- /container -->
+</body>
+</html>

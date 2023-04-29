@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.6'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    // 라이브러리들을 다운 받는 공간(사이트)
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // JDBC 드라이버
+//    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    // JPA
+    // 스프링부트가 자동으로 EntityManager를 생성함
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // H2 데이터베이스 클라이언트
+    runtimeOnly 'com.h2database:h2'
+    // 기본 내장 테스트 라이브러리: JUnit5
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
