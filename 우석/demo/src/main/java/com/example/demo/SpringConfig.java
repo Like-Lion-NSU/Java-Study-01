@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.repository.JdbcMemberRepository;
+import com.example.demo.repository.JdbcTemplateMemberRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,8 @@ public class SpringConfig {
     public MemberRepository memberRepository(){
 //        return new MemoryMemberRepository();
         // MemberRepository 구현체만 JDBC 리포지토리로 변경
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+        // MemberRepository 구현체만 JDBC Template 리포지토리로 변경
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
