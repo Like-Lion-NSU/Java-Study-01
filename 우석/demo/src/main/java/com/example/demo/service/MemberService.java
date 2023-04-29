@@ -9,11 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 // @Service: 스프링이 실행될 때, 스프링 컨테이너가 서비스 객체를 만들고 스프링 빈으로 등록함
-@Service
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    @Autowired
     // DI(Dependency Injection): MemberRepository를 외부에서 주입하도록 변경
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
