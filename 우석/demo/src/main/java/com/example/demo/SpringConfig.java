@@ -1,23 +1,22 @@
 package com.example.demo;
 
-import com.example.demo.repository.JdbcTemplateMemberRepository;
+import com.example.demo.repository.JpaMemberRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.MemberService;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
-
 @Configuration
 public class SpringConfig {
-    // 스프링 빈이 데이터 소스를 만들어 줌
-    private DataSource dataSource;
+    // 스프링 빈이 엔티티 매니저를 만들어 줌
+    private EntityManager em;
 
-    // DataSource 주입
+    // EntityManager 주입
     @Autowired
-    public SpringConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
 
     // @Bean: 메서드를 실행하여 반환되는 객체를 스프링 빈에 등록
@@ -33,6 +32,8 @@ public class SpringConfig {
         // MemberRepository 구현체만 JDBC 리포지토리로 변경
 //        return new JdbcMemberRepository(dataSource);
         // MemberRepository 구현체만 JDBC Template 리포지토리로 변경
-        return new JdbcTemplateMemberRepository(dataSource);
+//        return new JdbcTemplateMemberRepository(dataSource);
+        // MemberRepository 구현체만 JPA 리포지토리로 변경
+        return new JpaMemberRepository(em);
     }
 }

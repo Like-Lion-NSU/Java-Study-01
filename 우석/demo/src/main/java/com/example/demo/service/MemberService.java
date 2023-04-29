@@ -2,13 +2,14 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 // @Service: 스프링이 실행될 때, 스프링 컨테이너가 서비스 객체를 만들고 스프링 빈으로 등록함
+// @Transactional: JPA에서 모든 데이터 변경은 transaction 안에서 실행되어야함
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 
