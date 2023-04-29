@@ -1,9 +1,12 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+// @Repository: 스프링이 실행될 때, 스프링 컨테이너가 리포지토리 객체를 만들고 스프링 빈으로 등록함
+@Repository
 public class MemoryMemberRepository implements MemberRepository{
     // 데이터를 저장하는 변수
     // 동시성 문제를 해결하려면 ConcurrentHashMap 사용
