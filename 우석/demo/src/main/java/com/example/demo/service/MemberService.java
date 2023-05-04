@@ -9,6 +9,8 @@ import java.util.Optional;
 
 // @Service: 스프링이 실행될 때, 스프링 컨테이너가 서비스 객체를 만들고 스프링 빈으로 등록함
 // @Transactional: JPA에서 모든 데이터 변경은 transaction 안에서 실행되어야함
+// 이 어노테이션이 작성된 클래스에 있는 메서드를 실행할 때마다 트랜잭션이 시작됨
+// 트랜잭션에서 메서드가 정상 종료되면 트랜잭션을 커밋하고 런타임 예외가 발생하면 롤백함
 @Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
