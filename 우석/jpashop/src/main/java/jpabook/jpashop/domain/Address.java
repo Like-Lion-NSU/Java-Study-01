@@ -4,8 +4,7 @@ import jakarta.persistence.Embeddable;
 import lombok.Getter;
 
 // @Embeddable: JPA 내장타입, 어딘가 내장될 수 있음
-// @Entity를 작성하지 않아서 테이블로 만들지도 않고 pk인 id 필드도 존재하지 않음
-// 그냥 엔티티의 값을 저장하는 객체?
+// @Entity 어노테이션을 작성하지 않아서 테이블로 만들지 않고 pk인 id 필드도 존재하지 않음
 @Embeddable
 // 값은 변경이 되면 안 돼서 setter를 만들지 않음
 @Getter
@@ -26,5 +25,4 @@ public class Address {
         this.street = street;
         this.zipcode = zipcode;
     }
-
 }
