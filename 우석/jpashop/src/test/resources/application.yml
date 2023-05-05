@@ -1,0 +1,30 @@
+spring:
+  # 데이터베이스 커넥션과 관련된 데이터 소스 설정
+  # Hikari CP를 사용해서 커넥션 풀 등을 스프링부트가 알아서 세팅해줌
+#  datasource:
+    # 데이터베이스 접근 url
+    # 메모리 모드로 실행
+#    url: jdbc:h2:mem:test
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+  # jpa 설정
+  # 스프링부트 메뉴얼에서 설정법 확인 가능
+#  jpa:
+#    hibernate:
+      # create: 애플리케이션 실행 시점에 테이블을 지우고 다시 생성
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+        # show_sql: true, System.out에 출력
+#        format_sql: true
+
+# 로깅 설정
+logging:
+  # 로그 레벨 설정
+  level:
+    # debug 모드 시 hibernate가 남기는 모든 sql을 볼 수 있음
+    # 로거를 통해 출력
+    org.hibernate.SQL: debug
+    # 쿼리 파라미터 로그 남기기
+    org.hibernate.orm.jdbc.bind: trace #스프링 부트 3.x, hibernate6
