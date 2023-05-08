@@ -63,4 +63,60 @@ public class Order {
         this.delivery = delivery;
         delivery.setOrder(this);
     }
+
+    // 생성 메서드
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems){
+        // 주문 생성
+        Order order = new Order();
+
+        // 멤버 세팅
+        order.setMember(member);
+        // 배송 세팅
+        order.setDelivery(delivery);
+
+        // 주문상품 추가
+        for(OrderItem orderItem : orderItems){
+            order.addOrderItem(orderItem);
+        }
+
+        // 주문상태 세팅
+        order.setStatus(OrderStatus.ORDER);
+        // 주문시간 세팅
+        order.setOrderDate(LocalDateTime.now());
+
+        return order;
+    }
+
+    // 비즈니스 로직
+
+    // 주문 취소
+    public void cancel(){
+        // 배송상태 체크
+        if(delivery.getStatus() == DeliveryStatus.COMP){
+            // IllegalStateException 발생
+            throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
+        }
+
+        // 주문상태 변경
+        this.setStatus(OrderStatus.CANCEL);
+
+        // 재고 원복
+        for(OrderItem orderItem : orderItems){
+            // 응집성을 위한 메서드
+            orderItem.cancel();
+        }
+    }
+
+    // 조회 로직
+
+    // 전체 주문 가격 조회
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for(OrderItem orderItem : orderItems){
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return totalPrice;
+        // 스트림 활용
+//        return orderItems.stream().mapToInt(OrderItem::getTotalPrice).sum();
+    }
 }
