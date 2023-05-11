@@ -1,7 +1,9 @@
 package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -14,6 +16,9 @@ import java.util.List;
 @Table(name = "orders")
 @Getter
 @Setter
+// @NoArgsConstructor: 기본 생성자
+// AccessLevel.PROTECTED: 접근 제어자를 protected로 설정하여 외부에서 사용하지 못하게 함
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
     @Id
     @GeneratedValue
@@ -27,12 +32,12 @@ public class Order {
     private Member member;
 
     // 일대다 관계
-    // CascadeType.ALL: 컬렉션에 persist를 전파(부모와 같이 진행)
+    // CascadeType.ALL: 연결된 엔티티에 persist를 전파해줌
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     // 일대일 관계, 지연로딩 설정
-    // CascadeType.ALL: 각각 진행하는 persist를 같이 진행하게 해줌
+    //
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     // 외래키 설정, 연관관계 주인
     // Delivery 보다 Order에서 접근을 더 많이 함
@@ -42,7 +47,7 @@ public class Order {
     // 주문시간
     private LocalDateTime orderDate;
 
-    // EumType.STRING: Enum 타입 값을 문자열로 지정
+    // EnumType.STRING: Enum 타입 값을 문자열로 지정
     @Enumerated(EnumType.STRING)
     // 주문상태 (ORDER, CANCEL)
     private OrderStatus status;
