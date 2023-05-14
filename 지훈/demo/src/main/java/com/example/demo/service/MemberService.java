@@ -1,15 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.Repository.MemberRepository;
-import com.example.demo.Repository.MemoryMemberRepository;
 import com.example.demo.domain.Member;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
+//@Service// 컴포넌트 방식
+@Transactional
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+
+    private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -19,11 +21,19 @@ public class MemberService {
      * 회원가입
      */
     public Long join(Member member) {
-        // 같은 이름이 있는 중복회원 X
-        validateDuplicateMember(member);
 
-        memberRepository.save(member);
-        return member.getId();
+//        long start = System.currentTimeMillis();
+//        try {
+            // 같은 이름이 있는 중복회원 X
+            validateDuplicateMember(member);
+
+            memberRepository.save(member);
+            return member.getId();
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("join =" + timeMs + "ms");
+//        }
     }
 
     private void validateDuplicateMember(Member member) {
@@ -37,7 +47,15 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+//        long start = System.currentTimeMillis();
+//        try {
+            return memberRepository.findAll();
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMS = finish - start;
+//            System.out.println("findMembers " + timeMS + "ms");
+//        }
+
     }
     public Optional<Member> findOne(Long memberId) {
         return memberRepository.findById(memberId);
