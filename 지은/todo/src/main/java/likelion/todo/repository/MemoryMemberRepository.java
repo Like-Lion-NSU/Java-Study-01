@@ -38,4 +38,8 @@ public class MemoryMemberRepository implements MemberTodoRepository {
 //
 //    }
 
+    public void clearStore(){
+        store.clear();
+    }
+
 }
