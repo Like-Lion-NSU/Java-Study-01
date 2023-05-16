@@ -11,5 +11,4 @@ public interface MemberTodoRepository {
     boolean check(Todo todo);
     List<Todo> findAllTodo();
     Optional<Todo> findOneTodo(long id);
-//    Optional<Todo> findByName(String name);
 }

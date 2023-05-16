@@ -3,16 +3,20 @@ package likelion.todo.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Todo {
     @Id @GeneratedValue
-    private String day;
+    private Long id;
     private boolean che = false;
     private String title;
-    private long id;
+    private LocalDateTime day;
 
 }

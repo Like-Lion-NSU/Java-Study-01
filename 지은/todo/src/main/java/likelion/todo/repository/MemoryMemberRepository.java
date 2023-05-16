@@ -33,11 +33,6 @@ public class MemoryMemberRepository implements MemberTodoRepository {
         return Optional.ofNullable(store.get(id));
     }
 
-//    @Override
-//    public Optional<Todo> findByName(String name) {
-//
-//    }
-
     public void clearStore(){
         store.clear();
     }
