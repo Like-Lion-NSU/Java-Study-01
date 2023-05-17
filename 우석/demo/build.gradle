@@ -19,7 +19,7 @@ dependencies {
     // JDBC 드라이버
 //    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     // JPA
-    // 스프링부트가 자동으로 EntityManager를 생성함
+    // 스프링부트가 자동으로 EntityManager를 데이터베이스와 연결해서 생성해줌
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     // H2 데이터베이스 클라이언트
     runtimeOnly 'com.h2database:h2'
