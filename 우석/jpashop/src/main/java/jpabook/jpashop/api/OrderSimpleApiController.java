@@ -54,6 +54,16 @@ public class OrderSimpleApiController {
         return result;
     }
 
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> ordersV3(){
+        // 패치조인을 이용한 N+1 문제 해결
+        List<Order> orders =  orderRepository.findAllWithMemberDelivery();
+        List<SimpleOrderDto> result = orders.stream()
+                .map(SimpleOrderDto::new)
+                .collect(Collectors.toList());
+        return result;
+    }
+
     @Data
     // API 스펙을 명확히 정의
     static class SimpleOrderDto{

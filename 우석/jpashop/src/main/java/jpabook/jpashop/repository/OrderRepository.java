@@ -111,4 +111,14 @@ public class OrderRepository {
 
         return query.getResultList();
     }
+
+    // 패치조인 활용
+    public List<Order> findAllWithMemberDelivery() {
+        // order를 가져올 때 한번에 member와 delivery도 가져옴 (join과 동시에 select)
+        // LAZY 옵션을 다 무시하고 값을 다 채워서 가져옴
+        return em.createQuery("select o from Order o " +
+                "join fetch o.member m " +
+                "join fetch o.delivery d ", Order.class)
+                .getResultList();
+    }
 }
