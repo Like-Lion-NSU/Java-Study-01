@@ -4,11 +4,10 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.service.MemberService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 // @RestController = @Controller + @ResponseBody
 // @ResponseBody: json이나 xml 데이터를 바로 보냄
@@ -34,6 +33,30 @@ public class MemberApiController {
 
         Long id = memberService.join(member);
         return new CreateMemberResponse(id);
+    }
+
+    @PutMapping("/api/v2/members/{id}")
+    // 등록이랑 수정은 API 스펙이 달라서 별도의 DTO 사용
+    public UpdateMemberResponse updateMemberV2(@PathVariable("id") Long id,
+                                               @RequestBody @Valid UpdateMemberRequest request){
+        // 커맨드와 쿼리의 분리
+        memberService.update(id, request.getName());
+        Member findMember = memberService.findOne(id);
+        return new UpdateMemberResponse(findMember.getId(), findMember.getName());
+    }
+
+    @Data
+    // 업데이트 요청 DTO
+    static class UpdateMemberRequest{
+        private String name;
+    }
+
+    @Data
+    @AllArgsConstructor
+    // 업데이트 응답 DTO
+    static class UpdateMemberResponse{
+        private Long id;
+        private String name;
     }
 
     @Data
