@@ -9,12 +9,46 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 // @RestController = @Controller + @ResponseBody
 // @ResponseBody: json이나 xml 데이터를 바로 보냄
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
     private final MemberService memberService;
+
+    @GetMapping("api/v1/members")
+    public List<Member> membersV1(){
+        return memberService.findMembers();
+    }
+
+    @GetMapping("api/v2/members")
+    public Result membersV2(){
+        List<Member> findMembers = memberService.findMembers();
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+        // List를 바로 반환하면 json의 배열타입으로 반환이 되므로 Result로 감싸줌
+        return new Result(collect);
+    }
+
+    @Data
+    @AllArgsConstructor
+    // 데이터를 감싸는 객체
+    // 추가 필드가 생겨도 변경이 쉬움
+    static class Result<T>{
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    // 외부에 노출할 것만 DTO에 저장
+    // API 스펙 == DTO 코드
+    static class MemberDto{
+        private String name;
+    }
 
     // 첫 번째 버전
     @PostMapping("/api/v1/members")

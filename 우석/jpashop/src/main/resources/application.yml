@@ -13,7 +13,8 @@ spring:
   jpa:
     hibernate:
       # create: 애플리케이션 실행 시점에 테이블을 지우고 다시 생성
-      ddl-auto: create
+      # none: 데이터베이스의 정보가 유지됨
+      ddl-auto: none
     properties:
       hibernate:
         # show_sql: true, System.out에 출력
