@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,5 +27,7 @@ public class Member {
     // 일대다 관계
     // 양방향 연관관계, order 테이블에 있는 member 필드에 의해서 매핑됨
     @OneToMany(mappedBy = "member")
+    // @JsonIgnore: json으로 반환할 때 무시함
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 }

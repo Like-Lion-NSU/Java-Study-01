@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.item.Item;
 import lombok.AccessLevel;
@@ -29,6 +30,7 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     // 외래키 설정, 연관관계 주인
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order;
 
     // 주문 가격
