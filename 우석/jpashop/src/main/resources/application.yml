@@ -19,6 +19,8 @@ spring:
       hibernate:
         # show_sql: true, System.out에 출력
         format_sql: true
+        # default_batch_fetch_size: in query의 개수
+        default_batch_fetch_size: 100
 
 # 로깅 설정
 logging:

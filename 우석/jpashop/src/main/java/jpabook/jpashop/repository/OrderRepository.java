@@ -122,6 +122,19 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    // 페이징 쿼리
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery("select o from Order o " +
+                        // XToOne 관계는 페치 조인으로 쿼리 수를 줄임
+                        "join fetch o.member m " +
+                        "join fetch o.delivery d ", Order.class)
+                // offset 부터
+                .setFirstResult(offset)
+                // limit 까지
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     public List<Order> findAllWithItem() {
         // hibernate 버전 6부터는 distinct 명령어가 자동 수행됨
         return em.createQuery("select distinct o from Order o " +

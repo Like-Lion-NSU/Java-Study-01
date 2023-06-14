@@ -10,6 +10,7 @@ import jpabook.jpashop.repository.OrderSearch;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -52,7 +53,16 @@ public class OrderApiController {
     @GetMapping("/api/v3/orders")
     public List<OrderDto> ordersV3(){
         List<Order> orders = orderRepository.findAllWithItem();
-        
+        List<OrderDto> result = orders.stream()
+                .map(o -> new OrderDto(o))
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    @GetMapping("/api/v3.1/orders")
+    public List<OrderDto> ordersV3_page(@RequestParam(value = "offset", defaultValue = "0") int offset,
+                                        @RequestParam(value = "limit", defaultValue = "100") int limit){
+        List<Order> orders = orderRepository.findAllWithMemberDelivery(offset, limit);
         List<OrderDto> result = orders.stream()
                 .map(o -> new OrderDto(o))
                 .collect(Collectors.toList());
@@ -66,8 +76,8 @@ public class OrderApiController {
         private LocalDateTime orderDate;
         private OrderStatus orderStatus;
         private Address address;
-        // 단순히 DTO로 엔티티를 래핑해서 보내는 것이 아닌 엔티티에 대한 의존을 완전히 끊어야함
-        // 나중에 OrderItem이 바뀌면 API 스펙도 다 바뀌게 되기 때문에 OrderItem도 DTO로 변환해서 반환해야함
+        // 단순히 DTO로 엔티티를 래핑해서 보내는 것이 아닌 엔티티에 대한 의존을 완전히 끊어야 함
+        // 나중에 OrderItem이 바뀌면 API 스펙도 다 바뀌게 되기 때문에 OrderItem도 DTO로 변환해서 반환해야 함
         private List<OrderItemDto> orderItems;
 
         public OrderDto(Order order) {
