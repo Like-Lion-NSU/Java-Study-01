@@ -36,7 +36,7 @@ public class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         // then
-        assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member, memberRepository.findById(savedId).get());
         // 같은 트랜잭션 안에서 같은 pk 값이 같은 엔티티는 같은 영속성 컨텍스트 안에서 하나로 관리됨
     }
 
