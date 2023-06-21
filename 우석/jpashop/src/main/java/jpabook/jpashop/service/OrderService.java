@@ -65,6 +65,6 @@ public class OrderService {
     // 검색
     // 단순 조회 기능이나, 리포지토리에 단순하게 위임만 하는 로직은 컨트롤러에서 바로 리포지토리를 호출해도 된다.
     public List<Order> findOrders(OrderSearch orderSearch){
-        return orderRepository.findAllByString(orderSearch);
+        return orderRepository.findAll(orderSearch);
     }
 }
